@@ -27,4 +27,7 @@ export const style = StyleSheet.create({
         marginTop: 20
 
     },
+    Icon: {
+        width: '100%'
+    }
 })

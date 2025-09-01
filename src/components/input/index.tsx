@@ -1,5 +1,5 @@
 import React, { forwardRef, Fragment, LegacyRef } from "react";
-import { View, Text, TextInput, TextInputProps } from "react-native";
+import { View, Text, TextInput, TextInputProps, Touchable, TouchableOpacity } from "react-native";
 import { style } from "./style";
 //import { MaterialIcons}  from '@expo/vector-icons';
 import { themas } from "../../global/themes";
@@ -25,14 +25,21 @@ export const Input = forwardRef((Props: Props, forwardRef: LegacyRef<TextInput>|
         <Fragment>
             <Text style={style.titleInput}>{title}</Text>
             <View style={style.boxInput}>
+                {Iconleft && IconLeftName && (
+                    <TouchableOpacity>
+                        <Iconleft name={IconLeftName as any} size={20} color={themas.colors.gray} style={style.Icon} />
+                    </TouchableOpacity>
+                )}
                 <TextInput
                     style={style.input}
                 />
-                <MaterialIcons
-                    name="email"
-                    size={20}
-                    color={themas.colors.gray}
-                />
+              {IconRight && IconLeftName && (
+            
+                 <TouchableOpacity>
+                 <IconRight name={IconRightName as any} size={20} color={themas.colors.gray}
+                 style={style.Icon} />
+                 </TouchableOpacity>
+              )}
             </View>
         </Fragment>
     )
