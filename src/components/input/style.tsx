@@ -20,4 +20,11 @@ export const style = StyleSheet.create({
         borderRadius: 40,
         padding: 5,
     },
+
+    titleInput: {
+        marginLeft: 5,
+        color: themas.colors.gray,
+        marginTop: 20
+
+    },
 })
