@@ -47,6 +47,9 @@ export default function Login() {
         title="ENDEREÇO E-MAIL"
         IconRight={MaterialIcons}
         IconRightName="email"
+         Iconleft={MaterialIcons}
+        IconLeftName="email"
+
         />
          <Input 
         value={password}
