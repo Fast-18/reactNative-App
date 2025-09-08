@@ -5,6 +5,7 @@ import Logo from "../../assets/logo.png";
 import { MaterialIcons, Octicons } from '@expo/vector-icons';
 import { themas } from "../../global/themes";
 import { Input } from "../../components/input";
+import { Button } from "../../components/Button";
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -59,32 +60,7 @@ export default function Login() {
         secureTextEntry={showPassword}
         onIconRightPress={() => setShowPassword(!showPassword)}
         />
-        {/*<Text style={style.titleInput}>Endereço de e-mail</Text>
-        <View style={style.boxInput}>
-          <TextInput
-            style={style.input}
-            value={email}
-            onChangeText={setEmail}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-          <MaterialIcons name="email" size={20} color={themas.colors.gray} />
-        </View>
-
-        <Text style={style.titleInput}>Senha</Text>
-        <View style={style.boxInput}>
-          <TextInput
-            style={style.input}
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-          />
-          <MaterialIcons
-            name="remove-red-eye"
-            size={20}
-            color={themas.colors.gray}
-          />
-        </View> */}
+       
       </View>
 
       <View style={style.boxBotton}>
@@ -94,7 +70,9 @@ export default function Login() {
           ) : (
             <Text style={style.textButton}>Entrar</Text>
           )}
+        <Button text="Entrar" loading = {loading} onPress={()=>getLogin} />
         </TouchableOpacity>
+
       </View>
 
       <Text style={style.textBotton}>
