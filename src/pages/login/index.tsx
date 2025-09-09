@@ -6,8 +6,12 @@ import { MaterialIcons, Octicons } from '@expo/vector-icons';
 import { themas } from "../../global/themes";
 import { Input } from "../../components/input";
 import { Button } from "../../components/Button";
+import { useNavigation, NavigationProp } from '@react-navigation/native'
 
 export default function Login() {
+  
+  const navigation = useNavigation<NavigationProp<any>>();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(true);
@@ -21,8 +25,12 @@ export default function Login() {
         return Alert.alert('Atenção!', 'Informe os campos obrigatórios');
       }
 
+      navigation.navigate("BottomRoutes")
+
+      console.log("Logou!!!!!!!!!!!!!!!!!!!!!!!");
+
       setTimeout(() => {
-        if (email === 'gusta@gmail.com' && password === '12345678') {
+        if (email === 'mat@gmail.com' && password === '12345678') {
           Alert.alert('Logado com sucesso!');
         } else {
           Alert.alert('Usuário não encontrado!');
@@ -31,6 +39,8 @@ export default function Login() {
       }, 3000);
     } catch (error) {
       console.log(error);
+     
+    } finally {
       setLoading(false);
     }
   }
@@ -63,17 +73,9 @@ export default function Login() {
        
       </View>
 
-      <View style={style.boxBotton}>
-        <TouchableOpacity style={style.button} onPress={getLogin}>
-          {loading ? (
-            <ActivityIndicator color={'#fff'} size="small" />
-          ) : (
-            <Text style={style.textButton}>Entrar</Text>
-          )}
-        <Button text="Entrar" loading = {loading} onPress={()=>getLogin} />
-        </TouchableOpacity>
-
-      </View>
+    <View style={style.boxBotton}>
+                <Button text="Entrar" loading={loading} onPress={() => getLogin()} />
+            </View>
 
       <Text style={style.textBotton}>
         não tem conta?{' '}
