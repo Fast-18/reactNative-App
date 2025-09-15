@@ -8,23 +8,23 @@ export default function Routes() {
 
     return (
         <Stack.Navigator
-        initialRouteName="Login"
-        screenOptions={{
-            headerShown: false,
-            cardStyle: {
-                backgroundColor: "#FFF"
-            }
-        }}
+            initialRouteName="Login"
+            screenOptions={{
+                headerShown: false,
+                cardStyle: {
+                    backgroundColor: "#FFF"
+                }
+            }}
         >
+            <Stack.Screen
+                name="Login"
+                component={Login}
+            />
+            <Stack.Screen
+                name="BottomRoutes"
+                component={BottomRoutes}
+            />
 
-        <Stack.Screen
-        name="Login"
-        component={Login}
-        />
-        <Stack.Screen
-        name="BottomRoutes"
-        component={BottomRoutes}
-        />
         </Stack.Navigator>
     )
 }

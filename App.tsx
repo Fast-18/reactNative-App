@@ -1,7 +1,7 @@
 import './gesture-handler';
-import { StyleSheet } from 'react-native'; 
+import { StyleSheet } from 'react-native';
 import Routes from './src/routes/index.routes';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native'
 
 export default function App() {
   return (
@@ -15,5 +15,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   }
-  
+
 });

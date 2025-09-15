@@ -1,8 +1,8 @@
-import { Button, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
-import { themas } from "../../global/themes";
+import { themas } from "../../global/themes"
 
-export const style = StyleSheet.create ({
+export const style = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
@@ -19,7 +19,7 @@ export const style = StyleSheet.create ({
     boxMid: {
         height: Dimensions.get('window').height / 4,
         width: '100%',
-        //backgroundColor: 'green',
+        //backgroundColor: 'green'
         paddingHorizontal: 37
     },
     boxBotton: {
@@ -45,7 +45,7 @@ export const style = StyleSheet.create ({
         backgroundColor: themas.colors.primary,
         borderRadius: 40,
         shadowColor: "#000",
-        textShadowOffset: {
+        shadowOffset: {
             width: 0,
             height: 3,
         },
@@ -55,11 +55,13 @@ export const style = StyleSheet.create ({
     },
     textButton: {
         fontSize: 16,
-        color: '#fff',
+        color: '#FFF',
         fontWeight: 'bold'
     },
     textBotton: {
         fontSize: 16,
         color: themas.colors.gray
-    }
+    },
+
+
 })
