@@ -3,7 +3,7 @@ import { Alert } from "react-native";
 
 export const AuthContextList: any = createContext({});
 
-export const authProviderList = (props: any): any => {
+export const AuthProviderList = (props: any): any => {
 
     const onOpen = () => {
         Alert.alert('Atenção, modal aberto!')
