@@ -1,9 +1,37 @@
 import React from "react";
 import { Text, View } from "react-native";
+import { FlatList } from "react-native";
 import { style } from "./styles";
 import { Input } from "../../components/input";
-import { MaterialIcons} from '@expo/vector-icons'
+import { MaterialIcons} from '@expo/vector-icons';
 
+type PropCard = {
+    item: number,
+    title: string,
+    description: string,
+    flag: 'urgente' | 'opcional'
+}
+
+const data: Array<PropCard> = [
+    {
+        item: 0,
+        title: 'Realizar lição de casa',
+        description: 'página 18 ao 28',
+        flag: 'urgente'
+    },
+      {
+        item: 1,
+        title: 'Passear com o cachorro',
+        description: 'página 18 ao 28',
+        flag: 'urgente'
+    },
+      {
+        item: 3,
+        title: 'Sair para tomar um sirvetão',
+        description: 'página 18 ao 28',
+        flag: 'urgente'
+    },
+]
 export default function List() {
     return (
         <View style={style.container}>
@@ -15,6 +43,14 @@ export default function List() {
             IconLeftName="search"
             />
         </View>
+            </View>
+            <View style={style.boxList}>
+                <FlatList 
+                data={data}
+                style={{marginTop: 40, paddingHorizontal: 30}}
+                keyExtractor={(item, index) => item.item.toString()}
+                renderItem={({item, index}) => { return (<Text>{item.title}</Text>)}}
+                />
             </View>
         </View>
     )
