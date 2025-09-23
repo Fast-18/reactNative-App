@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useRef} from "react";
-import { Dimensions, Text } from "react-native";
+import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import { Modalize } from "react-native-modalize";
+import { style } from "../pages/login/styles";
 
 export const AuthContextList: any = createContext({});
 
@@ -11,7 +13,25 @@ export const AuthProviderList = (props: any): any => {
        modalizeRef?.current?.open();
     }
     const _container = () => {
-        return<Text>Olá Guys</Text>
+        return (
+           <View style={styles.container}>
+                <View style={styles.header}>
+                        <TouchableOpacity>
+                            <MaterialIcons
+                            name="close"
+                            size={30}
+                            />
+                        </TouchableOpacity>
+                        <Text>criar tarefa</Text>
+                        <TouchableOpacity>
+                            <AntDesign
+                            name="check"
+                            size={30}
+                            />
+                        </TouchableOpacity>
+                </View>
+           </View> 
+        )
         
   
     }
@@ -20,11 +40,17 @@ export const AuthProviderList = (props: any): any => {
         {props.children}
         <Modalize
         ref={modalizeRef}
-        modalHeight={Dimensions.get('window').height / 1.3}
-        />
+        //modalHeight={Dimensions.get('window').height / 1.3}
+        childrenStyle = {{height: Dimensions.get('window').height / 1.3}}
+        adjustToContentHeight={true}
+        >
         {_container()}
+        </Modalize>
         </AuthContextList.Provider>
     )
 }
 
 export const useAuth = () => useContext(AuthContextList);
+export const styles = StyleSheet.create({
+
+})
