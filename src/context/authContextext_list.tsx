@@ -1,8 +1,9 @@
-import React, { createContext, useContext, useRef} from "react";
+import React, { createContext, useContext, useRef , useEffect } from "react";
 import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import { Modalize } from "react-native-modalize";
 import { style } from "../pages/login/styles";
+import { Input } from "../components/input";
 
 export const AuthContextList: any = createContext({});
 
@@ -12,6 +13,9 @@ export const AuthProviderList = (props: any): any => {
     const onOpen = () => {
        modalizeRef?.current?.open();
     }
+    useEffect (() => {
+        onOpen()
+    }, [])
     const _container = () => {
         return (
            <View style={styles.container}>
@@ -22,13 +26,40 @@ export const AuthProviderList = (props: any): any => {
                             size={30}
                             />
                         </TouchableOpacity>
-                        <Text>criar tarefa</Text>
+                       
+                             <Text style={styles.title}>Criar Tarefa</Text>
+                        
                         <TouchableOpacity>
                             <AntDesign
                             name="check"
                             size={30}
                             />
                         </TouchableOpacity>
+                </View>
+                <View style={styles.content}>
+                    <Input
+                    title="Titulo"
+                    labelStyle={styles.label}
+                    />
+                    <Input
+                    title="Descrição"
+                    labelStyle={styles.label}
+                    height={100}
+                    multiline
+                    numberOfLines={5}
+                    />
+                </View>
+                <View style={{width:'40%'}}>
+                    <Input 
+                    title="Tempo limite:"
+                    labelStyle={styles.label}
+                    />
+                </View>
+                <View style={styles.containerFlag}>
+                    <Text style={styles.label}>Flags:</Text>
+                    <View style={{}}>
+
+                    </View>
                 </View>
            </View> 
         )
@@ -52,5 +83,33 @@ export const AuthProviderList = (props: any): any => {
 
 export const useAuth = () => useContext(AuthContextList);
 export const styles = StyleSheet.create({
+    container: {
+        width: '100%'
+    },
+    header: {
+        width: '100%',
+        height: 40,
+        paddingHorizontal: 40,
+        flexDirection: 'row',
+        marginTop: 20,
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    content: {
+        width: '100%',
+        paddingHorizontal: 20,
 
+    },
+    containerFlag: {
+        width: '100%',
+        padding: 10
+    },
+    label: {
+        fontWeight: 'bold',
+        color: '#000'
+    }
 })
