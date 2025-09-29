@@ -1,160 +1,172 @@
-import React, { createContext, useContext, useRef , useEffect, useState } from "react";
-import { Dimensions, KeyboardAvoidingView, Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { createContext, useContext, useRef, useEffect, useState } from "react";
+import { Dimensions, KeyboardAvoidingView, Platform, StyleSheet, Text, Touchable, TouchableOpacity, View } from "react-native";
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import { Modalize } from "react-native-modalize";
 import { Input } from "../components/input";
 import { themas } from "../global/themes";
 import { Flag } from "../components/Flag";
-import { Colors } from "react-native/Libraries/NewAppScreen";
-import CustomDateTimePicker from '../components/CustomDateTimePicker';
-import { style } from "../pages/login/styles";
+import CustomDateTimePicker from "../components/CustomDateTimePicker";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const AuthContextList: any = createContext({});
+
 const flags = [
-    { caption: 'Urgente', color: themas.colors.red},
-    { caption: 'Opcional', color: themas.colors.bluelight}
-]
+    { caption: 'Urgente', color: themas.colors.red },
+    { caption: 'Opcional', color: themas.colors.blueLight }
+];
 
 export const AuthProviderList = (props: any): any => {
 
     const modalizeRef = useRef<Modalize>(null);
     const [title, setTitle] = useState('');
-    const [description, SetDescription] = useState('');
+    const [description, setDescription] = useState('');
     const [selectedFlag, setSelected] = useState('Urgente');
-    const [selectedDate, setSelectedDate] = useState (new Date());
-    const [selectedTime, setSelectedTime] = useState (new Date());
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedTime, setSelectedTime] = useState(new Date());
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [showTimePicker, setShowTimePicker] = useState(false);
 
     const onOpen = () => {
-       modalizeRef?.current?.open();
+        ;
+        modalizeRef?.current?.open();
+
     }
     const onClose = () => {
         modalizeRef?.current?.close();
     }
-    useEffect (() => {
+
+    useEffect(() => {
         onOpen()
     }, [])
 
-    const _renderFlag = () => {
+    const _renderFlags = () => {
         return (
-            flags.map ((item, index) => (
+            flags.map((item, index) => (
                 <TouchableOpacity key={index}>
                     <Flag
-                    caption={item.caption}
-                    color={item.color}
-                    selected
+                        caption={item.caption}
+                        color={item.color}
+                        selected
                     />
                 </TouchableOpacity>
             ))
         )
     }
-    const handDateChance = (date) => {
+    const handleDateChange = (date) => {
         setSelectedDate(date);
     }
-    const handTimechange = (date) => {
+    const handleTimeChange = (date) => {
         setSelected(date);
+    }
+    const handleSave = () => {
+        const newItem = {
+            item: 0,
+            title: 'Titulo',
+            description: 'Descrição',
+            flags: 'Flags',
+            timeLimite: '01.02.2025'
+        }
+        console.log(newItem)
     }
     const _container = () => {
         return (
-        <KeyboardAvoidingView 
-        style={styles.container}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+            <KeyboardAvoidingView
+                style={styles.container}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            >
                 <View style={styles.header}>
-                        <TouchableOpacity onPress={()=> onClose()}>
-                            <MaterialIcons
+                    <TouchableOpacity onPress={() => onClose()}>
+                        <MaterialIcons
                             name="close"
                             size={30}
-                            />
-                        </TouchableOpacity>
-                       
-                             <Text style={styles.title}>Criar Tarefa</Text>
-                        
-                        <TouchableOpacity>
-                            <AntDesign
+                        />
+                    </TouchableOpacity>
+
+                    <Text style={styles.title}>Criar Tarefa</Text>
+
+                    <TouchableOpacity>
+                        <AntDesign
                             name="check"
                             size={30}
-                            />
-                        </TouchableOpacity>
+                        />
+                    </TouchableOpacity>
+
                 </View>
                 <View style={styles.content}>
                     <Input
-                    title="Titulo"
-                    labelStyle={styles.label}
-                    value={title}
-                    onChangeText={setTitle}
+                        title="Titulo"
+                        labelStyle={styles.label}
+                        value="title"
+                        onChangeText={setTitle}
                     />
                     <Input
-                    title="Descrição"
-                    labelStyle={styles.label}
-                    height={100}
-                    multiline
-                    numberOfLines={5}
-                    value={description}
-                    onChangeText={SetDescription}
-                    textAlignVertical="top"
+                        title="Descrição"
+                        labelStyle={styles.label}
+                        height={100}
+                        multiline
+                        numberOfLines={5}
+                        value={description}
+                        onChangeText={setDescription}
                     />
                 </View>
-                <View style={{width:'40%'}}>
-                   {/* <Input 
-                    title="Tempo limite:"
-                    labelStyle={styles.label}
+                <View style={{ width: '40%' }}>
+                    {/*<Input
+                        title="Tempo Limite"
+                        labelStyle={styles.label}
                     /> */}
-                    <View style={{flexDirection: 'row', gap: 10, width: '100%' }}>
-                        <TouchableOpacity onPress={() => setShowDatePicker(true)} style={{width: 200}}
-                           >
-                            <Input
-                            title="Data Limite"
-                            labelStyle={styles.label} 
-                            editable={false}
-                            value={selectedDate.toLocaleDateString()}
-                             onPress={() =>setShowDatePicker(true)}/>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{width: 120}} onPress={() => setShowDatePicker(true)}>
+                    <View style={{flexDirection: 'row'}}>
+                        <TouchableOpacity onPress={() => setShowDatePicker(true)} style={{width: 200}}>
                             <Input 
-                            title='Hora Limite'
+                            title="Data Limite"
                             labelStyle={styles.label}
                             editable={false}
-                            value={selectedTime.toLocaleDateString()}
+                            value={selectedDate.toLocaleDateString()}
                             onPress={() => setShowDatePicker(true)}
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{ width: 120 }} onPress={() => setShowTimePicker(true)}>
+                            <Input 
+                            title="Hora Limite"
+                            labelStyle={styles.label}
+                            editable={false}
+                            value={selectedDate.toLocaleTimeString()}
+                            onPress={() => setShowTimePicker(true)}
                             />
                         </TouchableOpacity>
                     </View>
                     <CustomDateTimePicker
-                    onDateChange={handDateChance}
-                    setShow={setShowDatePicker}
-                    show={showDatePicker}
-                    type={'date'}
+                        onDateChange={handleDateChange}
+                        setShow={setShowDatePicker}
+                        show={showDatePicker}
+                        type={'date'}
                     />
-                    <CustomDateTimePicker 
-                    onDateChange={handTimechange}
-                    setShow={setShowTimePicker}
-                    show={showTimePicker}
-                    type={'time'}
+                    <CustomDateTimePicker
+                        onDateChange={handleTimeChange}
+                        setShow={setShowTimePicker}
+                        show={showTimePicker}
+                        type={'time'}
                     />
                 </View>
                 <View style={styles.containerFlag}>
                     <Text style={styles.label}>Flags:</Text>
                     <View style={styles.rowFlags}>
-                        {_renderFlag( )}
+                        {_renderFlags()}
                     </View>
                 </View>
-           </KeyboardAvoidingView>
+            </KeyboardAvoidingView>
         )
-        
-  
     }
     return (
-        <AuthContextList.Provider value = {{ onOpen}}>
-        {props.children}
-        <Modalize
-        ref={modalizeRef}
-        //modalHeight={Dimensions.get('window').height / 1.3}
-        childrenStyle = {{height: Dimensions.get('window').height / 1.3}}
-        adjustToContentHeight={true}
-        >
-        {_container()}
-        </Modalize>
+        <AuthContextList.Provider value={{ onOpen }}>
+            {props.children}
+            <Modalize
+                ref={modalizeRef}
+                //modalHeight={Dimensions.get('window').height / 1.3}
+                childrenStyle={{ height: Dimensions.get('window').height / 1.3 }}
+                adjustToContentHeight={true}
+            >
+                {_container()}
+            </Modalize>
         </AuthContextList.Provider>
     )
 }
@@ -179,8 +191,7 @@ export const styles = StyleSheet.create({
     },
     content: {
         width: '100%',
-        paddingHorizontal: 20,
-
+        paddingHorizontal: 20
     },
     containerFlag: {
         width: '100%',
