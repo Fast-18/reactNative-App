@@ -7,6 +7,7 @@ import { themas } from "../global/themes";
 import { Flag } from "../components/Flag";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import CustomDateTimePicker from '../components/CustomDateTimePicker';
+import { style } from "../pages/login/styles";
 
 export const AuthContextList: any = createContext({});
 const flags = [
@@ -98,6 +99,26 @@ export const AuthProviderList = (props: any): any => {
                     title="Tempo limite:"
                     labelStyle={styles.label}
                     /> */}
+                    <View style={{flexDirection: 'row', gap: 10, width: '100%' }}>
+                        <TouchableOpacity onPress={() => setShowDatePicker(true)} style={{width: 200}}
+                           >
+                            <Input
+                            title="Data Limite"
+                            labelStyle={styles.label} 
+                            editable={false}
+                            value={selectedDate.toLocaleDateString()}
+                             onPress={() =>setShowDatePicker(true)}/>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{width: 120}}>
+                            <Input 
+                            title='Hora Limite'
+                            labelStyle={styles.label}
+                            editable={false}
+                            value={selectedTimee.toLocaleDateString()}
+                            onPress={() => setShowDatePicker(true)}
+                            />
+                        </TouchableOpacity>
+                    </View>
                     <CustomDateTimePicker
                     onDateChange={handDateChance}
                     setShow={setShowDatePicker}
