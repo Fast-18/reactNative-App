@@ -22,9 +22,9 @@ export const AuthProviderList = (props: any): any => {
     const [description, SetDescription] = useState('');
     const [selectedFlag, setSelected] = useState('Urgente');
     const [selectedDate, setSelectedDate] = useState (new Date());
-    const [selectedTimee, setSelectedTime] = useState (new Date());
+    const [selectedTime, setSelectedTime] = useState (new Date());
     const [showDatePicker, setShowDatePicker] = useState(false);
-    const [showTimePicker, setTimePicker] = useState(false);
+    const [showTimePicker, setShowTimePicker] = useState(false);
 
     const onOpen = () => {
        modalizeRef?.current?.open();
@@ -92,6 +92,7 @@ export const AuthProviderList = (props: any): any => {
                     numberOfLines={5}
                     value={description}
                     onChangeText={SetDescription}
+                    textAlignVertical="top"
                     />
                 </View>
                 <View style={{width:'40%'}}>
@@ -109,12 +110,12 @@ export const AuthProviderList = (props: any): any => {
                             value={selectedDate.toLocaleDateString()}
                              onPress={() =>setShowDatePicker(true)}/>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{width: 120}}>
+                        <TouchableOpacity style={{width: 120}} onPress={() => setShowDatePicker(true)}>
                             <Input 
                             title='Hora Limite'
                             labelStyle={styles.label}
                             editable={false}
-                            value={selectedTimee.toLocaleDateString()}
+                            value={selectedTime.toLocaleDateString()}
                             onPress={() => setShowDatePicker(true)}
                             />
                         </TouchableOpacity>
@@ -124,6 +125,12 @@ export const AuthProviderList = (props: any): any => {
                     setShow={setShowDatePicker}
                     show={showDatePicker}
                     type={'date'}
+                    />
+                    <CustomDateTimePicker 
+                    onDateChange={handTimechange}
+                    setShow={setShowTimePicker}
+                    show={showTimePicker}
+                    type={'time'}
                     />
                 </View>
                 <View style={styles.containerFlag}>
