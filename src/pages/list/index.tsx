@@ -9,32 +9,41 @@ import { themas } from "../../global/themes";
 import { AuthContextList } from "../../context/authContextext_list";
 import { AuthContextType, PropCard } from "../../global/Props";
 import { formatDateToBR } from "../../global/function";
-import { Swipeable} from "react-native-gesture-handler"
+import { Directions, Swipeable } from "react-native-gesture-handler"
 
 export default function List() {
 
-    const { taskList } = useContext<AuthContextType>(AuthContextList)
+    const { taskList, handleDelete } = useContext<AuthContextType>(AuthContextList)
     const swipeableRefs = useRef([])
-    const renderRightActions = () => {
-        return (
-            <View style={style.button}>
-                <AntDesign
+    const renderRightActions = () => (
+
+        <View style={style.button}>
+            <AntDesign
                 name="delete"
                 size={20}
                 color={'#FFF'}
-                 />
-            </View>
-        )
+            />
+        </View>
+
+    );
+    const handleSwipeOpen = (directions: 'right' | 'left', item, index) => {
+        if (directions == 'right') {
+            handleDelete(item)
+            swipeableRefs.current[index]?.close()
+        } else {
+            //
+        }
     }
+
     const renderLeftActions = () => {
         return (
-            <View style={[style.button, {backgroundColor: themas.colors.blueLight}]}>
+            <View style={[style.button, { backgroundColor: themas.colors.blueLight }]}>
                 <AntDesign
-                name="edit"
-                size={20}
-                color={'#FFF'}
+                    name="edit"
+                    size={20}
+                    color={'#FFF'}
                 />
-                </View>
+            </View>
         )
     }
 
@@ -42,24 +51,25 @@ export default function List() {
         const color = item.flag == 'Opcional' ? themas.colors.blueLight : themas.colors.red
         return (
             <Swipeable
-            ref={(ref) => swipeableRefs.current[index] = ref} 
-            key={index}
-            renderRightActions = {renderRightActions}
-            renderLeftActions = {renderLeftActions}>
-            <View style={style.card}>
-                <View style={style.rowCard}>
-                    <View style={style.rowCardLeft}>
-                        <Ball color={color} />
-                        <View>
-                            <Text style={style.titleCard}>{item.title}</Text>
-                            <Text style={style.descriptionCard}>{item.description}</Text>
-                            <Text style={style.descriptionCard}>Até {formatDateToBR(item.timeLimit)}</Text>
+                ref={(ref) => swipeableRefs.current[index] = ref}
+                key={index}
+                renderRightActions={renderRightActions}
+                renderLeftActions={renderLeftActions}
+                onSwipeableOpen={(directions) => handleSwipeOpen(directions, item, index)}>
+                <View style={style.card}>
+                    <View style={style.rowCard}>
+                        <View style={style.rowCardLeft}>
+                            <Ball color={color} />
+                            <View>
+                                <Text style={style.titleCard}>{item.title}</Text>
+                                <Text style={style.descriptionCard}>{item.description}</Text>
+                                <Text style={style.descriptionCard}>Até {formatDateToBR(item.timeLimit)}</Text>
+                            </View>
                         </View>
+                        <Flag caption={item.flag}
+                            color={color} />
                     </View>
-                    <Flag caption={item.flag}
-                     color={color} />
                 </View>
-            </View>
             </Swipeable>
         )
     }
