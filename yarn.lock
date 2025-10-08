@@ -1405,19 +1405,19 @@
     use-latest-callback "^0.2.4"
     use-sync-external-store "^1.5.0"
 
-"@react-navigation/elements@^2.6.4":
-  version "2.6.4"
-  resolved "https://registry.npmjs.org/@react-navigation/elements/-/elements-2.6.4.tgz"
-  integrity sha512-O3X9vWXOEhAO56zkQS7KaDzL8BvjlwZ0LGSteKpt1/k6w6HONG+2Wkblrb057iKmehTkEkQMzMLkXiuLmN5x9Q==
+"@react-navigation/elements@^2.6.4", "@react-navigation/elements@^2.6.5":
+  version "2.6.5"
+  resolved "https://registry.npmjs.org/@react-navigation/elements/-/elements-2.6.5.tgz"
+  integrity sha512-HOaekvFeoqKyaSKP2hakL7OUnw0jIhk/1wMjcovUKblT76LMTumZpriqsc30m/Vnyy1a8zgp4VsuA1xftcalgQ==
   dependencies:
     color "^4.2.3"
     use-latest-callback "^0.2.4"
     use-sync-external-store "^1.5.0"
 
-"@react-navigation/native@^7.1.17":
-  version "7.1.17"
-  resolved "https://registry.npmjs.org/@react-navigation/native/-/native-7.1.17.tgz"
-  integrity sha512-uEcYWi1NV+2Qe1oELfp9b5hTYekqWATv2cuwcOAg5EvsIsUPtzFrKIasgUXLBRGb9P7yR5ifoJ+ug4u6jdqSTQ==
+"@react-navigation/native@^7.1.17", "@react-navigation/native@^7.1.18":
+  version "7.1.18"
+  resolved "https://registry.npmjs.org/@react-navigation/native/-/native-7.1.18.tgz"
+  integrity sha512-DZgd6860dxcq3YX7UzIXeBr6m3UgXvo9acxp5jiJyIZXdR00Br9JwVkO7e0bUeTA2d3Z8dsmtAR84Y86NnH64Q==
   dependencies:
     "@react-navigation/core" "^7.12.4"
     escape-string-regexp "^4.0.0"
@@ -1432,12 +1432,12 @@
   dependencies:
     nanoid "^3.3.11"
 
-"@react-navigation/stack@^7.4.8":
-  version "7.4.8"
-  resolved "https://registry.npmjs.org/@react-navigation/stack/-/stack-7.4.8.tgz"
-  integrity sha512-zZsX52Nw1gsq33Hx4aNgGV2RmDJgVJM71udomCi3OdlntqXDguav3J2t5oe/Acf/9uU8JiJE9W8JGtoRZ6nXIg==
+"@react-navigation/stack@^7.4.9":
+  version "7.4.9"
+  resolved "https://registry.npmjs.org/@react-navigation/stack/-/stack-7.4.9.tgz"
+  integrity sha512-uQBiHt52yIyZm59dofCoLrvGvfPSfnzAmCstT+skRw4bBporka2ZZYzFJZakjsUeb6cK/5QcQPSM3poHkGp2nA==
   dependencies:
-    "@react-navigation/elements" "^2.6.4"
+    "@react-navigation/elements" "^2.6.5"
     color "^4.2.3"
 
 "@sinclair/typebox@^0.27.8":

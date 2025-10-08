@@ -3,6 +3,7 @@ export interface AuthContextType {
     onOpen: void,
     handleDelete: Function,
     handleEdit: Function,
+    filter: (t: string) => void
 }
 
 export type PropCard = {
@@ -12,4 +13,5 @@ export type PropCard = {
     timeLimit: string,
     title: string,
 }
+
 export type PropFlags = 'Urgente' | 'Opcional'

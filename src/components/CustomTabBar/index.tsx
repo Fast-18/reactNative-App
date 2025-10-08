@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { style } from "./styles";
 import { AntDesign, FontAwesome, Entypo, MaterialIcons} from '@expo/vector-icons';
 import { themas } from "../../global/themes";
-import { AuthContextList } from "../../context/authContextext_list";
+import { AuthContextList } from "../../context/authContextList";
 
 
 export default ({ state, navigation }: any) => {

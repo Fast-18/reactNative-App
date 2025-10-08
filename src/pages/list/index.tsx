@@ -6,17 +6,17 @@ import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 import { Ball } from "../../components/Ball";
 import { Flag } from "../../components/Flag";
 import { themas } from "../../global/themes";
-import { AuthContextList } from "../../context/authContextext_list";
-import { AuthContextType, PropCard } from "../../global/Props";
+import { AuthContextList } from "../../context/authContextList";
 import { formatDateToBR } from "../../global/function";
-import { Directions, Swipeable } from "react-native-gesture-handler"
+import { AuthContextType, PropCard } from "../../global/Props";
+import { Directions, Swipeable } from "react-native-gesture-handler";
 
 export default function List() {
 
-    const { taskList, handleDelete, handleEdit } = useContext<AuthContextType>(AuthContextList)
+    const { taskList, handleDelete, handleEdit, filter } = useContext<AuthContextType>(AuthContextList)
     const swipeableRefs = useRef([])
-    const renderRightActions = () => (
 
+    const renderRightActions = () => (
         <View style={style.button}>
             <AntDesign
                 name="delete"
@@ -24,12 +24,11 @@ export default function List() {
                 color={'#FFF'}
             />
         </View>
-
     );
+
     const handleSwipeOpen = (directions: 'right' | 'left', item, index) => {
         if (directions == 'right') {
             handleDelete(item)
-            
         } else {
             handleEdit(item)
         }
@@ -56,7 +55,8 @@ export default function List() {
                 key={index}
                 renderRightActions={renderRightActions}
                 renderLeftActions={renderLeftActions}
-                onSwipeableOpen={(directions) => handleSwipeOpen(directions, item, index)}>
+                onSwipeableOpen={(directions) => handleSwipeOpen(directions, item, index)}
+            >
                 <View style={style.card}>
                     <View style={style.rowCard}>
                         <View style={style.rowCardLeft}>
@@ -67,7 +67,8 @@ export default function List() {
                                 <Text style={style.descriptionCard}>Até {formatDateToBR(item.timeLimit)}</Text>
                             </View>
                         </View>
-                        <Flag caption={item.flag}
+                        <Flag
+                            caption={item.flag}
                             color={color} />
                     </View>
                 </View>
@@ -78,11 +79,12 @@ export default function List() {
         <View style={style.container}>
             <View style={style.header}>
                 <Text style={style.greeting}>Bom dia,
-                    <Text style={{ fontWeight: 'bold' }}> Matheus </Text></Text>
+                    <Text style={{ fontWeight: 'bold' }}> Matheus</Text></Text>
                 <View style={style.boxInput}>
                     <Input
                         IconLeft={MaterialIcons}
                         IconLeftName="search"
+                        onChangeText={(t) => filter(t)}
                     />
                 </View>
             </View>

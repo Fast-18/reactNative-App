@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import List from "../pages/list";
 import User from "../pages/user";
 import CustomTabBar from "../components/CustomTabBar";
-import { AuthProviderList } from "../context/authContextext_list";
+import { AuthProviderList } from "../context/authContextList";
 
 const Tab = createBottomTabNavigator();
 
