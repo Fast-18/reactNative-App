@@ -13,7 +13,7 @@ export const style = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 5,
-        backgroundColor: themas.colors.lightGray,
+        backgroundColor: '#fff',
         borderColor: themas.colors.lightGray
     },
     input: {
