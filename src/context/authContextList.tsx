@@ -17,7 +17,7 @@ export const AuthContextList: any = createContext({});
 
 const flags = [
     { caption: 'Audiência', color: themas.colors.red },
-    { caption: 'Vídeo-conferência', color: themas.colors.blueLight },
+    { caption: 'Sessão', color: themas.colors.blueLight },
     { caption: 'Intervalo', color: themas.colors.yellow },
     { caption: 'Estudos', color: themas.colors.green }
 ];
