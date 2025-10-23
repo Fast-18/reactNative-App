@@ -16,9 +16,12 @@ import { PropCard } from "../global/Props";
 export const AuthContextList: any = createContext({});
 
 const flags = [
-    { caption: 'Urgente', color: themas.colors.red },
-    { caption: 'Opcional', color: themas.colors.blueLight }
+    { caption: 'Audiência', color: themas.colors.red },
+    { caption: 'Vídeo-conferência', color: themas.colors.blueLight },
+    { caption: 'Intervalo', color: themas.colors.yellow },
+    { caption: 'Estudos', color: themas.colors.green }
 ];
+
 
 
 export const AuthProviderList = (props: any): any => {
@@ -26,7 +29,7 @@ export const AuthProviderList = (props: any): any => {
     const modalizeRef = useRef<Modalize>(null);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [selectedFlag, setSelectedFlag] = useState('Urgente');
+    const [selectedFlag, setSelectedFlag] = useState('Audiência'); 
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedTime, setSelectedTime] = useState(new Date());
     const [showDatePicker, setShowDatePicker] = useState(false);
@@ -42,7 +45,9 @@ export const AuthProviderList = (props: any): any => {
     }
     const onClose = () => {
         modalizeRef?.current?.close();
+        setData(); // 🔹 limpa os campos ao fechar o modal
     }
+
 
     useEffect(() => {
         get_taskList()
@@ -88,7 +93,7 @@ export const AuthProviderList = (props: any): any => {
                     selectedDate.getDate(),
                     selectedTime.getHours(),
                     selectedTime.getMinutes()
-                ).toISOString(),
+                )
             }
             const storageData = await AsyncStorage.getItem('taskList');
             //console.log(storageData)
@@ -287,6 +292,7 @@ export const AuthProviderList = (props: any): any => {
             {props.children}
             <Modalize
                 ref={modalizeRef}
+                onClosed={setData}
                 // modalHeight={Dimensions.get('window').height / 1.3}
                 childrenStyle={{ height: Dimensions.get('window').height / 1.3 }}
                 adjustToContentHeight={true}
